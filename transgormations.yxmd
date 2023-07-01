@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2022.3">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="54" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="25">D:\Level 4 term 2\DWH Project\drive-download-20230427T131328Z-001\Project work flow\destination1.xlsx|||`Sheet1$`</File>
+          <FormatSpecificOptions>
+            <FirstRowData>False</FirstRowData>
+            <ImportLine>1</ImportLine>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>destination1.xlsx
+Query=`Sheet1$`</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="RecordID" source="File: D:\Level 4 term 2\DWH Project\drive-download-20230427T131328Z-001\Project work flow\destination1.xlsx|||`Sheet1$`" type="Double" />
+            <Field name="gender" size="255" source="File: D:\Level 4 term 2\DWH Project\drive-download-20230427T131328Z-001\Project work flow\destination1.xlsx|||`Sheet1$`" type="V_String" />
+            <Field name="race/ethnicity" size="255" source="File: D:\Level 4 term 2\DWH Project\drive-download-20230427T131328Z-001\Project work flow\destination1.xlsx|||`Sheet1$`" type="V_String" />
+            <Field name="parental level of education" size="255" source="File: D:\Level 4 term 2\DWH Project\drive-download-20230427T131328Z-001\Project work flow\destination1.xlsx|||`Sheet1$`" type="V_String" />
+            <Field name="lunch" size="255" source="File: D:\Level 4 term 2\DWH Project\drive-download-20230427T131328Z-001\Project work flow\destination1.xlsx|||`Sheet1$`" type="V_String" />
+            <Field name="test preparation course" size="255" source="File: D:\Level 4 term 2\DWH Project\drive-download-20230427T131328Z-001\Project work flow\destination1.xlsx|||`Sheet1$`" type="V_String" />
+            <Field name="math score" source="File: D:\Level 4 term 2\DWH Project\drive-download-20230427T131328Z-001\Project work flow\destination1.xlsx|||`Sheet1$`" type="Double" />
+            <Field name="reading score" source="File: D:\Level 4 term 2\DWH Project\drive-download-20230427T131328Z-001\Project work flow\destination1.xlsx|||`Sheet1$`" type="Double" />
+            <Field name="writing score" source="File: D:\Level 4 term 2\DWH Project\drive-download-20230427T131328Z-001\Project work flow\destination1.xlsx|||`Sheet1$`" type="Double" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="186" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Expression>[gender] ="male"</Expression>
+          <Mode>Custom</Mode>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>[gender] ="male"</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="366" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="Substring([race/ethnicity],6,1)" field="Category" size="255" type="V_String" />
+            <FormulaField expression="ReplaceChar([parental level of education], &quot; &quot;, &quot;_&quot;)" field="parental level of education" size="255" type="V_String" />
+            <FormulaField expression="UpperCase(Substring([lunch],0,1))+ Substring([lunch],1,Length([lunch])-1)" field="lunch" size="255" type="V_String" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Category = Substring([race/ethnicity],6,1)
+parental level of education = Replace...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="366" y="222" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="UpperCase(Substring([lunch],0,1))+ Substring([lunch],1,Length([lunch])-1)" field="lunch" size="255" type="V_String" />
+            <FormulaField expression="Substring([race/ethnicity],6,1)" field="Category" size="255" type="V_String" />
+            <FormulaField expression="ReplaceChar([parental level of education], &quot; &quot;, &quot;_&quot;)" field="parental level of education" size="255" type="V_String" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>lunch = UpperCase(Substring([lunch],0,1))+ Substring([lunch],1,Length([lunch])-1...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+        <Position x="606" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <File MaxRecords="" FileFormat="18">odb:Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Project_DWH;Data Source=OOO\MSSQLSERVER01;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=OOO;Use Encryption for Data=False;Tag with column collation when possible=False|||destination1__part1</File>
+          <Passwords />
+          <Disable>False</Disable>
+          <FormatSpecificOptions>
+            <TransactionSize>0</TransactionSize>
+            <IgnoreDropTableSQLErrors>False</IgnoreDropTableSQLErrors>
+            <PostSQL />
+            <TableStyle>Quoted</TableStyle>
+            <PreSQL />
+            <TransactionMessages>False</TransactionMessages>
+            <OutputOption>Append</OutputOption>
+          </FormatSpecificOptions>
+          <MultiFile value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Source=OOO\MSSQLSERVER01
+Catalog=Project_DWH
+Query=destination1__part1</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+        <Position x="618" y="222" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <File MaxRecords="" FileFormat="18">odb:Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Project_DWH;Data Source=OOO\MSSQLSERVER01;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=OOO;Use Encryption for Data=False;Tag with column collation when possible=False|||destination2__part1</File>
+          <Passwords />
+          <Disable>False</Disable>
+          <FormatSpecificOptions>
+            <TransactionSize>0</TransactionSize>
+            <IgnoreDropTableSQLErrors>False</IgnoreDropTableSQLErrors>
+            <PostSQL />
+            <TableStyle>Quoted</TableStyle>
+            <PreSQL />
+            <TransactionMessages>False</TransactionMessages>
+            <OutputOption>Append</OutputOption>
+          </FormatSpecificOptions>
+          <MultiFile value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Source=OOO\MSSQLSERVER01
+Catalog=Project_DWH
+Query=destination2__part1</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="True" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="False" />
+      <Destination ToolID="4" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <RunWithE2 value="True" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>transgormations</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="74322101-8717-483b-9db1-9ff6be55f4cc" />
+      <Telemetry>
+        <PreviousWorkflowId value="cccc07e5-0b2b-42d8-ba2a-443138b3d60d" />
+        <OriginWorkflowId value="cccc07e5-0b2b-42d8-ba2a-443138b3d60d" />
+      </Telemetry>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
